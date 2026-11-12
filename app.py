@@ -6,7 +6,6 @@ model = joblib.load("iris_model.pkl")
 scaler = joblib.load("scaler.pkl")
 
 st.title("🌸 Iris Flower Species Predictor")
-st.write("Enter flower measurements and click Predict.")
 
 sl = st.number_input("Sepal Length")
 sw = st.number_input("Sepal Width")
