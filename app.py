@@ -1,177 +1,30 @@
-<!DOCTYPE html>
-<!-- saved from url=(0037)https://abdul-iris-app.streamlit.app/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no">
-    <meta name="theme-color" content="#FFFFFF">
-    <!-- Additional meta tags -->
+import streamlit as st
+import pandas as pd
+import joblib
 
-    <!--
-      We're putting icons here because ReactHelmet doesn't work for favicons.
-      See https://github.com/nfl/react-helmet/issues/430
-    -->
+model = joblib.load("iris_model.pkl")
+scaler = joblib.load("scaler.pkl")
 
-    <!--
-    Following a mix of:
-    - https://medium.com/swlh/are-you-using-svg-favicons-yet-a-guide-for-modern-browsers-836a6aace3df
-    - https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/
-    -->
-    
-    <!--
-    Including all these other <link> statements here just so they're all in the same place.
-    Not because we expect someone to Helmet-override them.
-    -->
-    
-    <link rel="mask-icon" href="https://abdul-iris-app.streamlit.app/favicon_safari_mask.png" color="#FF2B2B">
-    <link rel="apple-touch-icon" href="https://abdul-iris-app.streamlit.app/-/build/favicon_256.png">
-    <link rel="manifest" href="https://abdul-iris-app.streamlit.app/-/build/manifest.json">
-    <!-- Google Tag Manager -->
-    <script type="text/javascript" async="" src="./app_files/heap-.js.download"></script><script type="text/javascript" src="./app_files/commons.59560acdd69ed701c941.js.gz" async="" status="loaded"></script><script type="text/javascript" src="./app_files/heap.dynamic.js.gz" async="" status="loaded"></script><script type="text/javascript" async="" src="./app_files/analytics.js.download"></script><script type="text/javascript" async="" src="./app_files/analytics.min.js.download"></script><script async="" src="./app_files/gtm.js.download"></script><script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-          "gtm.start": new Date().getTime(),
-          event: "gtm.js",
-        });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-52GRQSL");
-    </script>
-    <!-- End Google Tag Manager -->
-    <!-- Segment -->
-    <script>
-      !(function () {
-        var analytics = (window.analytics = window.analytics || []);
-        if (!analytics.initialize)
-          if (analytics.invoked)
-            window.console && console.error && console.error("Segment snippet included twice.");
-          else {
-            analytics.invoked = !0;
-            analytics.methods = [
-              "trackSubmit",
-              "trackClick",
-              "trackLink",
-              "trackForm",
-              "pageview",
-              "identify",
-              "reset",
-              "group",
-              "track",
-              "ready",
-              "alias",
-              "debug",
-              "page",
-              "once",
-              "off",
-              "on",
-              "addSourceMiddleware",
-              "addIntegrationMiddleware",
-              "setAnonymousId",
-              "addDestinationMiddleware",
-            ];
-            analytics.factory = function (e) {
-              return function () {
-                var t = Array.prototype.slice.call(arguments);
-                t.unshift(e);
-                analytics.push(t);
-                return analytics;
-              };
-            };
-            for (var e = 0; e < analytics.methods.length; e++) {
-              var key = analytics.methods[e];
-              analytics[key] = analytics.factory(key);
-            }
-            analytics.load = function (key, e) {
-              var t = document.createElement("script");
-              t.type = "text/javascript";
-              t.async = !0;
-              t.src = "https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";
-              var n = document.getElementsByTagName("script")[0];
-              n.parentNode.insertBefore(t, n);
-              analytics._loadOptions = e;
-            };
-            analytics.SNIPPET_VERSION = "4.13.1";
-            analytics.load("GI7vYWHNmWwHbyFjBrvL0jOBA1TpZOXC");
-            // analytics.page()
-          }
-      })();
-    </script>
-    <!-- End Segment -->
-    <script type="module" crossorigin="" src="./app_files/index-CDJ3nEJ8.js.download"></script>
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/rolldown-runtime-CNC7AqOf.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/jsx-runtime-BtyjnKZj.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/cn-BZAAGw-p.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/routes-CSGpNduz.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/bufferedData-ymD0tp_Q.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/schemas-CsKhgDFl.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/tooltip-DmtfnmdT.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/snowflakeOAuth-DJsOf-uV.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/page-CSar2LvL.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/index.module-Bbot1wPI.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/esm-CXhqkufa.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/errorDetails-BoeL7g8o.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/emoji_u1f626-DA0aHyeW.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/errorPage-j7qP-ucv.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/error-BfS6M55g.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/CarouselOfStreamlitExampleApp-WHt6QRj6.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/SmallDivider-DuDZTfyp.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/login-CFFZ7Nsh.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/notFound-4fk-LevE.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/confirmationModal-BOsWCv_8.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/toNumber-D0RjNJYc.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/icon_analytics-CE5MjYW7.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/trim-yzKrW-as.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/popoverMenu-BlIhdTBl.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/isEqual-Ctd7G7xk.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/terminalContent-CGURstHr.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/CSSTransition-AnhMoI_S.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/useAppState-C67ktBD-.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/queryGithubRepository-DXxeIas3.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/streamlitAppContext-BB7rdvC6.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/toFinite-BW9Ru4Ym.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/icon_star_outline-DL_2fyLV.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/usePythonVersions-OJMc8JOG.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/appSettings-DA18COLj.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/useUserDetails-YXenulOS.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/banner-DNTp_Roh.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/icon_github-CfLfIzZH.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/icon_edit-DHRxkIDl.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/iframe-PlC_b34Z.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/ProfilePagePreview-VBYqXefU.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/states-C8aMn2Bd.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/streamlitAppPage-C9eLG_Fb.js">
-    <link rel="modulepreload" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/replayStats-C6TwcZID.js">
-    <link rel="stylesheet" crossorigin="" href="./app_files/schemas-Iu3KQOQJ.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/tooltip-D2S4___1.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/page-64Xl_BNC.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/errorDetails-BDQowOym.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/errorPage-CK-Jpwy3.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/CarouselOfStreamlitExampleApp-2FXfzJGp.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/SmallDivider-BlS60Rb-.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/login-CRVde-_5.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/notFound-BzJWtTwJ.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/confirmationModal-BwNoJBuP.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/popoverMenu-D49xGQkE.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/terminalContent-C2n1Mjw6.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/useAppState-BjTUZpyD.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/icon_star_outline-DH69RDEi.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/usePythonVersions-CBwCrTS9.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/appSettings-jOmLW4LG.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/banner-D2t2_Ovp.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/ProfilePagePreview-BWWUYPxS.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/states-8om4j6Tx.css">
-    <link rel="stylesheet" crossorigin="" href="./app_files/index-L1R9zUDf.css">
-  <style media=""></style><link rel="modulepreload" as="script" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/subdomain-Dw7w9E7t.js"><link rel="modulepreload" as="script" crossorigin="" href="https://abdul-iris-app.streamlit.app/-/build/assets/draftBarLayout-Bpb6frd7.js"><link rel="stylesheet" crossorigin="" href="./app_files/subdomain-CaQ_fr4L.css"><title>Streamlit</title><link id="favicon" rel="icon" href="https://abdul-iris-app.streamlit.app/~/+//favicon.png"><link id="alternate-favicon" rel="alternate icon" href="https://abdul-iris-app.streamlit.app/~/+//favicon.png"></head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"><div class=""><div class="_streamlitAppContainer_1j65n_1"><div class="_stateContainer_1j65n_26" style="padding-left: 0px; padding-right: 0px;"><iframe allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; clipboard-write; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads" height="auto" title="streamlitApp" src="./app_files/saved_resource.html" class="_iframe_1j65n_26"></iframe><button class="_terminalButton_rix23_138" data-testid="manage-app-button"><svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.00016 12L7.41016 10.59L2.83016 6L7.41016 1.41L6.00016 -1.23266e-07L0.000156927 6L6.00016 12Z" fill="white"></path></svg>Manage app</button></div></div></div><div class=""></div></div>
+st.title("🌸 Iris Flower Species Predictor")
+st.write("Enter flower measurements and click Predict.")
 
-    <!-- Status page embed -->
-    <script src="./app_files/script.js.download"></script><iframe src="./app_files/frame.html" title="Streamlit Cloud Status" aria-hidden="true" tabindex="-1" style="position: fixed; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; box-shadow: rgba(9, 20, 66, 0.25) 0px 20px 32px -8px; z-index: 9999; transition: left 1s, bottom 1s, right 1s; height: 115px; width: 320px; left: -9999px; right: auto; bottom: 60px;"></iframe>
-  
+sl = st.number_input("Sepal Length")
+sw = st.number_input("Sepal Width")
+pl = st.number_input("Petal Length")
+pw = st.number_input("Petal Width")
 
-</body></html>
+if st.button("Predict"):
+    data = pd.DataFrame(
+        [[sl, sw, pl, pw]],
+        columns=[
+            "sepal length (cm)",
+            "sepal width (cm)",
+            "petal length (cm)",
+            "petal width (cm)"
+        ]
+    )
+
+    data_scaled = scaler.transform(data)
+    prediction = model.predict(data_scaled)
+
+    st.success(f"Prediction: {prediction[0]}")
